@@ -1,6 +1,6 @@
 local TLConfigs = {}
 function TLConfigs:LoadWindUI()
-  return loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+  return loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/1.6.66/main.lua"))()
 end
 function TLConfigs:WindUIPopup(entrance, tt, CT, Btns)
   return entrance:Popup({Title = tt or "", Icon = "info", Content = CT or "", Buttons = Btns or {} })

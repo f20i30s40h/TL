@@ -5,7 +5,7 @@ end
 function TLConfigs:WindUIPopup(entrance, tt, CT, Btns)
   return entrance:Popup({Title = tt or "", Icon = "info", Content = CT or "", Buttons = Btns or {} })
 end
-function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname)
+function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname, size)
   entrance.TransparencyValue = 0
   local Window = entrance:CreateWindow({
     Title = name,
@@ -17,7 +17,7 @@ function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname)
     Acrylic = true,
     BackgroundImageTransparency = 0.45,
     Background = img,
-    Size = UDim2.fromOffset(580, 460)
+    Size = size or UDim2.fromOffset(580, 460)
   })
   Window:EditOpenButton({
     Title = openname or "Open",

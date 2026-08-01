@@ -16,7 +16,8 @@ function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname)
     Transparent = true,
     Acrylic = true,
     BackgroundImageTransparency = 0.45,
-    Background = img
+    Background = img,
+    Size = UDim2.fromOffset(580, 460)
   })
   Window:EditOpenButton({
     Title = openname or "Open",

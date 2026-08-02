@@ -56,6 +56,9 @@ function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname, siz
     end
   }
 end
+function TLConfigs:Notify(entrance, tt, ct, dr)
+  return entrance:Notify({Title = tt, Content = ct, Duration = dr})
+end
 function TLConfigs:AddTag(entrance, tt, ic, cl)
   return entrance:Tag({Title = tt or "v1.0.0", Icon = ic or "github", Color = cl or Color3.fromHex("#30ff6a"), Radius = 13})
 end

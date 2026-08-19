@@ -5,11 +5,12 @@ end
 function TLConfigs:WindUIPopup(entrance, tt, CT, Btns)
   return entrance:Popup({Title = tt or "", Icon = "info", Content = CT or "", Buttons = Btns or {} })
 end
-function TLConfigs:SetupWindUI(entrance, name, author, img, theme, openname, size)
+function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openname, size)
   entrance.TransparencyValue = 0
   local Window = entrance:CreateWindow({
     Title = name,
     Author = author,
+    Folder = folder,
     Icon = "solar:sun-2-bold",
     Theme = theme or "Violet",
     NewElements = true,

@@ -5,7 +5,7 @@ end
 function TLConfigs:WindUIPopup(entrance, tt, CT, Btns)
   return entrance:Popup({Title = tt or "", Icon = "info", Content = CT or "", Buttons = Btns or {} })
 end
-function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openname, size)
+function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openname, size, transparency, rainbow)
   entrance.TransparencyValue = 0
   local Window = entrance:CreateWindow({
     Title = name,
@@ -18,16 +18,18 @@ function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openn
     Acrylic = true,
     BackgroundImageTransparency = 0.45,
     Background = img,
-    Size = size or UDim2.fromOffset(580, 460)
+    Size = size or UDim2.fromOffset(580, 460),
+    BackgroundTransparency = transparency or 0.4
   })
   Window:EditOpenButton({
     Title = openname or "Open",
-    Icon = "monitor",
+    Icon = "gem",--monitor
     CornerRadius = UDim.new(0, 32),
     StrokeThickness = 2,
     OnlyMobile = false,
     Enabled = true,
     Draggable = true,
+    Color = rainbow and ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.10, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.20, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(0.30, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.40, Color3.fromRGB(0, 255, 255)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(0.60, Color3.fromRGB(139, 0, 255)), ColorSequenceKeypoint.new(0.70, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.80, Color3.fromRGB(255, 127, 0)), ColorSequenceKeypoint.new(0.90, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(0, 255, 0))}) or nil
   })
   return {
     Window = Window,

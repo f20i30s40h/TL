@@ -56,7 +56,10 @@ function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openn
     end,
     Dpd = function(section, title, values, value, multi, callback)
       return section:Dropdown({Title = title, Values = values or {}, Value = multi and {} or (value or (values and values[1])), Multi = multi or false, AllowNone = multi and true or nil, Callback = callback or function() end})
-    end
+    end,
+    Cp = function(section, title, def, callback)
+      return section:Colorpicker({Title = title, Default = def, Callback = callback})
+    end,
   }
 end
 function TLConfigs:Notify(entrance, tt, ct, dr)

@@ -200,7 +200,7 @@ function TLConfigs:Loop(mode, callback)
 end
 function TLConfigs:Export(wd)
   local env = getfenv(2)
-  local methods = {"AddTab", "Sec", "Btn", "Tg", "Tb", "Sld", "Para", "Dpd"}
+  local methods = {"AddTab", "Sec", "Btn", "Tg", "Tb", "Sld", "Para", "Dpd", "Cp"}
   for _, method in ipairs(methods) do
     env[method] = wd[method]
   end

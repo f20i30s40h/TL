@@ -13,7 +13,7 @@ function TLConfigs:SetupWindUI(entrance, name, author, folder, img, theme, openn
     Folder = folder,
     Icon = "solar:sun-2-bold",
     Theme = theme or "Violet",
-    NewElements = true,
+    --NewElements = true,
     Transparent = true,
     Acrylic = true,
     BackgroundImageTransparency = 0.45,

@@ -205,4 +205,66 @@ function TLConfigs:Export(wd)
     env[method] = wd[method]
   end
 end
+function TLConfigs:AddStroke(s_theme)
+  local COLORS = {
+  ["暗紫色"] = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.fromHex("2E1065")), ColorSequenceKeypoint.new(0.3, Color3.fromHex("4C1D95")), ColorSequenceKeypoint.new(0.6, Color3.fromHex("7C3AED")), ColorSequenceKeypoint.new(1, Color3.fromHex("C084FC"))}),
+  ["彩色"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromHex("FF0000")), ColorSequenceKeypoint.new(0.17, Color3.fromHex("FF7F00")), ColorSequenceKeypoint.new(0.33, Color3.fromHex("FFFF00")), ColorSequenceKeypoint.new(0.50, Color3.fromHex("00FF00")), ColorSequenceKeypoint.new(0.67, Color3.fromHex("00FFFF")), ColorSequenceKeypoint.new(0.83, Color3.fromHex("0000FF")), ColorSequenceKeypoint.new(1.00, Color3.fromHex("8B00FF"))}),
+  ["霓虹"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromHex("FF00FF")), ColorSequenceKeypoint.new(0.33, Color3.fromHex("A855F7")), ColorSequenceKeypoint.new(0.66, Color3.fromHex("00FFFF")), ColorSequenceKeypoint.new(1.00, Color3.fromHex("FF00FF"))}),
+  ["赛博"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromHex("00C6FF")), ColorSequenceKeypoint.new(0.30, Color3.fromHex("7C3AED")), ColorSequenceKeypoint.new(0.60, Color3.fromHex("FF2FD0")), ColorSequenceKeypoint.new(0.85, Color3.fromHex("FF8A00")), ColorSequenceKeypoint.new(1.00, Color3.fromHex("00C6FF"))}),
+  ["极光"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromHex("00FFB2")), ColorSequenceKeypoint.new(0.25, Color3.fromHex("00C6FF")), ColorSequenceKeypoint.new(0.50, Color3.fromHex("8B5CF6")), ColorSequenceKeypoint.new(0.75, Color3.fromHex("FF4FD8")), ColorSequenceKeypoint.new(1.00, Color3.fromHex("00FFB2"))}),
+  ["火焰"] = ColorSequence.new({ColorSequenceKeypoint.new(0.00, Color3.fromHex("FF1E00")), ColorSequenceKeypoint.new(0.33, Color3.fromHex("FF7A00")), ColorSequenceKeypoint.new(0.66, Color3.fromHex("FFD400")), ColorSequenceKeypoint.new(1.00, Color3.fromHex("FF1E00"))})
+}
+local borderAnimation
+local animationSpeed = 5
+local function createRainbowBorder(window, colorScheme)
+  local mainFrame = window.UIElements.Main
+  if not mainFrame then return nil end
+  local existingStroke = mainFrame:FindFirstChild("RainbowStroke")
+  if existingStroke then existingStroke:Destroy() end
+  if not mainFrame:FindFirstChildOfClass("UICorner") then
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 16)
+    corner.Parent = mainFrame
+  end
+  local rainbowStroke = Instance.new("UIStroke")
+  rainbowStroke.Name = "RainbowStroke"
+  rainbowStroke.Thickness = 1.5
+  rainbowStroke.Transparency = 0.15
+  rainbowStroke.Color = Color3.new(1, 1, 1)
+  rainbowStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+  rainbowStroke.LineJoinMode = Enum.LineJoinMode.Round
+  rainbowStroke.Parent = mainFrame
+  local glowEffect = Instance.new("UIGradient")
+  glowEffect.Name = "GlowEffect"
+  glowEffect.Color = COLORS[colorScheme]
+  glowEffect.Rotation = 0
+  glowEffect.Parent = rainbowStroke
+  local outerGlow = Instance.new("UIStroke")
+  outerGlow.Name = "OuterGlow"
+  outerGlow.Thickness = 8
+  outerGlow.Transparency = 0.85
+  outerGlow.Color = Color3.fromHex("7C3AED")
+  outerGlow.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+  outerGlow.Parent = mainFrame
+  return rainbowStroke
+end
+local function startBorderAnimation(window, speed)
+  local mainFrame = window.UIElements.Main
+  if not mainFrame then return nil end
+  local rainbowStroke = mainFrame:FindFirstChild("RainbowStroke")
+  if not rainbowStroke then return nil end
+  local glowEffect = rainbowStroke:FindFirstChild("GlowEffect")
+  if not glowEffect then return nil end
+  return game:GetService("RunService").Heartbeat:Connect(function()
+    if not rainbowStroke or rainbowStroke.Parent == nil then return end
+    glowEffect.Rotation = (tick() * speed * 10) % 360
+  end)
+end
+local rainbowStroke = createRainbowBorder(Window, s_theme)
+if rainbowStroke then
+  borderAnimation = startBorderAnimation(Window, animationSpeed)
+end
+
+
+end
 return TLConfigs
